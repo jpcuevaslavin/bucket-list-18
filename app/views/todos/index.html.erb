@@ -1,0 +1,23 @@
+<br>
+<h3 class="text-center">Listado de Tareas</h3>
+<br>
+<div class="row">
+  <% @todos.each do |todo|  %>
+    <div class="card col-sm-4">
+      <a href="<%= todo_path(todo.id) %>">
+        <img class="card-img-top" src="<%= todo.image %>" alt="Card image cap">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title"><%= todo.title %></h5>
+        <% if !current_user.todos.include? todo %>
+          No completada!
+          <a href="<%= todo_user_todos_path(todo.id) %>" class="btn btn-info btn-sm" data-method="POST">Completar</a>
+        <% else %>
+          Completada!
+          <a href="<%= todo_uncomplete_path(todo.id) %>" class="btn btn-danger btn-sm" data-method="DELETE">Deshacer</a>
+        <% end %>
+      
+      </div>
+    </div>
+  <% end %>
+</div>
